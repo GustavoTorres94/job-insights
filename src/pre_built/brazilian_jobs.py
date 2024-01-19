@@ -3,7 +3,7 @@ from src.insights.jobs import ProcessJobs
 
 
 def read_brazilian_file(path: str) -> List[Dict]:
-    """Reads a portuguese file from a given path and returns its contents
+    """Reads a portuguese file from a given path and returns its conte
 
     Parameters
     ----------
