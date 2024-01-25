@@ -8,27 +8,28 @@ class ProcessJobs:
 
     def read(self, path: str) -> List[Dict]:
         job_data = []
-        with open(path, "r", newline="", encoding="utf-8") as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                job_data.append(
-                    {
-                        "job_title": row["job_title"],
-                        "company": row["company"],
-                        "state": row["state"],
-                        "city": row["city"],
-                        "min_salary": row["min_salary"],
-                        "max_salary": row["max_salary"],
-                        "job_desc": row["job_desc"],
-                        "industry": row["industry"],
-                        "rating": row["rating"],
-                        "date_posted": row["date_posted"],
-                        "valid_until": row["valid_until"],
-                        "job_type": row["job_type"],
-                        "id": row["id"],
-                    }
-                )
-        print(job_data)
+        with open(path, "r") as file:
+            reader = csv.DictReader(file, delimiter=",", quotechar='"')
+            job_data = list(reader)
+            # for row in reader:
+            #     job_data.append(
+            #         {
+            #             "job_title": row["job_title"],
+            #             "company": row["company"],
+            #             "state": row["state"],
+            #             "city": row["city"],
+            #             "min_salary": row["min_salary"],
+            #             "max_salary": row["max_salary"],
+            #             "job_desc": row["job_desc"],
+            #             "industry": row["industry"],
+            #             "rating": row["rating"],
+            #             "date_posted": row["date_posted"],
+            #             "valid_until": row["valid_until"],
+            #             "job_type": row["job_type"],
+            #             "id": row["id"],
+            #         }
+            #     )
+        self.jobs_list = job_data
         return job_data
 
     def get_unique_job_types(self) -> List[str]:
@@ -51,8 +52,3 @@ class ProcessJobs:
             ):
                 filtered_jobs.append(job)
         return filtered_jobs
-
-
-inst = ProcessJobs()
-jobs_inst = inst.read("data/jobs.csv")
-print(jobs_inst)
